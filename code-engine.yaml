@@ -1,0 +1,6 @@
+apiVersion: codeengine.cloud.ibm.com/v1beta1
+kind: JobRun
+metadata:
+  name: android-gradle-build
+spec:
+  jobRef: android-gradle-build-job
