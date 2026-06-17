@@ -1,8 +1,62 @@
+# Git files
 .git
 .gitignore
+.gitattributes
+
+# IDE files
 .idea
+.vscode
+*.swp
+*.swo
+*~
+
+# Build artifacts
 .gradle
 build
 **/build
 local.properties
 *.iml
+*.apk
+*.ap_
+*.aab
+
+# Android Studio
+captures/
+.externalNativeBuild
+
+
+# Gradle cache
+.gradle/
+gradle-app.setting
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation and non-essential files
+README.md
+LICENSE
+*.md
+docs/
+
+# Test files (optional - uncomment if you don't need tests in container)
+# **/test/
+# **/androidTest/
+
+# Deployment scripts (already in container)
+deploy-test.sh
+code-engine.yaml
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp

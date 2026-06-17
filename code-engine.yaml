@@ -1,6 +1,45 @@
 apiVersion: codeengine.cloud.ibm.com/v1beta1
+kind: Job
+metadata:
+  name: android-gradle-build-job
+  labels:
+    app: sample-android-app
+    version: "1.0"
+    environment: production
+spec:
+  template:
+    spec:
+      containers:
+      - name: android-builder
+        image: <REGISTRY_URL>/<NAMESPACE>/sample-android-app:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        env:
+        - name: GRADLE_OPTS
+          value: "-Dorg.gradle.daemon=false -Xmx2g"
+        - name: JAVA_OPTS
+          value: "-Xmx2g"
+        - name: BUILD_ENV
+          value: "production"
+      restartPolicy: Never
+      maxRetries: 3
+  backoffLimit: 3
+  completions: 1
+  parallelism: 1
+---
+apiVersion: codeengine.cloud.ibm.com/v1beta1
 kind: JobRun
 metadata:
-  name: android-gradle-build
+  name: android-gradle-build-run
+  labels:
+    app: sample-android-app
+    version: "1.0"
 spec:
   jobRef: android-gradle-build-job
+  timeout: 1800  # 30 minutes timeout
